@@ -69,3 +69,17 @@ void oledkit_render_info_user(void) {
     keyball_oled_render_layerinfo();
 }
 #endif
+
+#ifdef COMBO_ENABLE
+
+const uint16_t PROGMEM my_jq[] = {KC_J, KC_Q, COMBO_END};
+
+combo_t key_combos[] = {
+COMBO(my_jq, KC_QUES),
+
+};
+
+#endif
+
+
+
