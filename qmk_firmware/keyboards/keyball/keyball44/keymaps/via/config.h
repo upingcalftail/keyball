@@ -34,7 +34,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #define TAP_CODE_DELAY 5
+//2025/05/02～ takashicompanyのAMLファームウェアを流用させてもらう
+//https://github.com/takashicompany/qmk_firmware/blob/keyball/keyboards/keyball/keyball44/keymaps/takashicompany/config.h
 
-#define POINTING_DEVICE_AUTO_MOUSE_ENABLE
-#define AUTO_MOUSE_DEFAULT_LAYER 1
-#define DYNAMIC_KEYMAP_LAYER_COUNT 6
+#define DYNAMIC_KEYMAP_LAYER_COUNT 7
+#define AUTO_MOUSE_DEFAULT_LAYER 7
+
+
+//#define POINTING_DEVICE_AUTO_MOUSE_ENABLE
+
+//コンボキー、CAPS_WORDなどの参考は mameさん
+//https://note.com/mamelog0103/n/n5a51fcd24f26
+#define CAPS_WORD_IDLE_TIMEOUT 5000  // 5 seconds.

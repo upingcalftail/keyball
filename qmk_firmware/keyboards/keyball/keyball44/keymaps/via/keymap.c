@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include QMK_KEYBOARD_H
+#include "keymap_jp.h"
 
 #include "quantum.h"
 
@@ -24,19 +25,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default (VIA)
   [0] = LAYOUT_universal(
-    KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                                        KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , KC_DEL   ,
-    KC_TAB   , KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_J     , KC_K     , KC_L     , KC_SCLN  , S(KC_7)  ,
-    KC_LSFT  , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                                        KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , KC_INT1  ,
-              KC_LALT,KC_LGUI,LCTL_T(KC_LNG2)     ,LT(1,KC_SPC),LT(3,KC_LNG1),                  KC_BSPC,LT(2,KC_ENT), RCTL_T(KC_LNG2),     KC_RALT  , KC_PSCR
+    KC_ESC   , KC_Q     , KC_L     , KC_U     , KC_COMM  , KC_DOT   ,                                        KC_F     , KC_W     , KC_R     , KC_Y     , KC_P     , KC_SCLN  ,
+    KC_TAB   , LT(6,KC_E), KC_I    , KC_A     , KC_O     , KC_SLSH  ,                                        KC_K     , KC_T     , KC_N     , KC_S     , LT(6,KC_H), KC_ENT  ,
+    KC_LCTL  , KC_Z     , KC_X     , KC_C     , KC_V     , LT(3,KC_MINS),                                    LT(3,KC_G), KC_D    , KC_M     , KC_J     , KC_B     , KC_INT1  ,
+               KC_LALT  , _______ , _______   ,LT(1,KC_SPC), LT(2,KC_LNG2),		  RSFT_T(KC_TAB), LT(1,KC_ENT), KC_BSPC  , KC_DEL   , KC_LGUI
   ),
 
   [1] = LAYOUT_universal(
-    SSNP_FRE ,  KC_F1   , KC_F2    , KC_F3   , KC_F4    , KC_F5    ,                                         KC_F6    , KC_F7    , KC_F8    , KC_F9    , KC_F10   , KC_F11   ,
-    SSNP_VRT ,  _______ , _______  , KC_UP   , KC_ENT   , KC_DEL   ,                                         KC_PGUP  , KC_BTN1  , KC_UP    , KC_BTN2  , KC_BTN3  , KC_F12   ,
-    SSNP_HOR ,  _______ , KC_LEFT  , KC_DOWN , KC_RGHT  , KC_BSPC  ,                                         KC_PGDN  , KC_LEFT  , KC_DOWN  , KC_RGHT  , _______  , _______  ,
-                  _______  , _______ , _______  ,         _______  , _______  ,                   _______  , _______  , _______       , _______  , _______
+    _______ ,   KC_F1   , KC_F2    , KC_F3   , KC_F4    , KC_F5    ,                                         KC_MINS  , KC_EQL   , KC_7     , KC_8     , KC_9     , KC_SCLN  ,
+    _______ ,   _______ , KC_AT    , KC_LBRC , KC_RBRC  , KC_2     ,                                         KC_PPLS  , KC_PMNS  , KC_4     , KC_5     , KC_6     , KC_QUOT  ,
+    _______ ,   _______ , _______  , _______ , _______  , KC_INT1  ,                                         KC_PAST  , KC_PSLS  , KC_1     , KC_2     , KC_3     , KC_PENT  ,
+                  _______  , _______ , _______  , _______  , _______  ,                          _______   , _______  , _______  , KC_P0    , KC_PDOT
   ),
-
+-
   [2] = LAYOUT_universal(
     _______  ,S(KC_QUOT), KC_7     , KC_8    , KC_9     , S(KC_8)  ,                                         S(KC_9)  , S(KC_1)  , S(KC_6)  , KC_LBRC  , S(KC_4)  , _______  ,
     _______  ,S(KC_SCLN), KC_4     , KC_5    , KC_6     , KC_RBRC  ,                                         KC_NUHS  , KC_MINS  , S(KC_EQL), S(KC_3)  , KC_QUOT  , S(KC_2)  ,
@@ -70,13 +71,39 @@ void oledkit_render_info_user(void) {
 }
 #endif
 
+/*
+2025/04/29 https://note.com/mamelog0103/n/n5a51fcd24f26を参考に追記
+*/
 #ifdef COMBO_ENABLE
+enum combos{
+DM_MOUSE_BUTTON_1,
+ZX_MOUSE_BUTTON_1,
+JB_MOUSE_BUTTON_2,
+CV_MOUSE_BUTTON_2,
+NS_MOUSE_BUTTON_3,
+IA_MOUSE_BUTTON_3,
+MJ_MOUSE_BUTTON_4,
+XC_MOUSE_BUTTON_4,
+};
 
-const uint16_t PROGMEM my_jq[] = {KC_J, KC_Q, COMBO_END};
+const uint16_t PROGMEM my_dm[] = {KC_D, KC_M, COMBO_END};
+const uint16_t PROGMEM my_zx[] = {KC_Z, KC_X, COMBO_END};
+const uint16_t PROGMEM my_jb[] = {KC_J, KC_B, COMBO_END};
+const uint16_t PROGMEM my_cv[] = {KC_C, KC_V, COMBO_END};
+const uint16_t PROGMEM my_ns[] = {KC_N, KC_S, COMBO_END};
+const uint16_t PROGMEM my_ia[] = {KC_I, KC_A, COMBO_END};
+const uint16_t PROGMEM my_mj[] = {KC_M, KC_J, COMBO_END};
+const uint16_t PROGMEM my_xc[] = {KC_X, KC_C, COMBO_END};
 
 combo_t key_combos[] = {
-COMBO(my_jq, KC_QUES),
-
+[DM_MB1]=COMBO(my_dm, QK_MOUSE_BUTTON_1),
+[ZX_MB1]=COMBO(my_zx, QK_MOUSE_BUTTON_1),
+[JB_MB2]=COMBO(my_jb, QK_MOUSE_BUTTON_2),
+[CV_MB2]=COMBO(my_cv, QK_MOUSE_BUTTON_2),
+[NS_MB3]=COMBO(my_ns, QK_MOUSE_BUTTON_3),
+[IA_MB3]=COMBO(my_ia, QK_MOUSE_BUTTON_3),
+[MJ_MB4]=COMBO(my_mj, QK_MOUSE_BUTTON_4),
+[XC_MB4]=COMBO(my_xc, QK_MOUSE_BUTTON_4),
 };
 
 #endif
